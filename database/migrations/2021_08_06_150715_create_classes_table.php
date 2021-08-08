@@ -16,9 +16,16 @@ class CreateClassesTable extends Migration
         Schema::create('classes', function (Blueprint $table) {
             $table->id();
             $table->string("libelle");
-            $table->string("coup pref");
-            $table->integer("pts de vie");
+            $table->string("couppref");
+            $table->integer("ptsdevie");
         });
+
+        Schema::update('classes', function (Blueprint $table) {
+            Schema::rename("coup pref", "couppref");
+
+            Schema::rename("pts de vie", "vie");
+        });
+
     }
 
     /**

@@ -17,11 +17,13 @@ class Controller extends BaseController
 
     public function index()
     {
-        $personnage = DB::select('select * from personnage');
-        dd($personnage);
-        $p = "bla";
-        var_dump($p);
+        // $personnage = DB::select('select * from personnage');
+        // dd($personnage);
+        // $p = "bla";
+        // var_dump($p);
 
-        return view('user.index', ['users' => $users]);
+        return "saluuuut";
+
+        //return view('user.index', ['users' => $users]);
     }
 }
