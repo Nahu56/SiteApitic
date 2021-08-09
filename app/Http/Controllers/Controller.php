@@ -8,7 +8,6 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 
 
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 
 class Controller extends BaseController
@@ -17,12 +16,6 @@ class Controller extends BaseController
 
     public function index()
     {
-        // $personnage = DB::select('select * from personnage');
-        // dd($personnage);
-        // $p = "bla";
-        // var_dump($p);
-
-        return "saluuuut";
 
         //return view('user.index', ['users' => $users]);
     }

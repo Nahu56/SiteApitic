@@ -21,6 +21,8 @@ class CreatePersonnagesTable extends Migration
             $table->integer("idRace");
             $table->integer("idCompte");
             $table->integer("idSpecialisation");
+            $table->integer("updated_at");
+            $table->integer("created_at");
         });
 
         

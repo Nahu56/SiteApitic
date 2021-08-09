@@ -15,7 +15,12 @@ use App\Http\Controllers\accueil;
 */
 
 
-Route::get('accueil', ['uses' => 'App\Http\Controllers\accueil@index']);
+Route::get('accueil', ['uses' => 'App\Http\Controllers\accueilController@index'])->name("accueil");
+
+Route::get('accueil/create', ['uses' => 'App\Http\Controllers\accueilController@create'])->name("personnage.create");
+
+Route::post('accueil/create', ['uses' => 'App\Http\Controllers\accueilController@store'])->name("personnage.store");
+
 
 // Route::get('accueil', function(){
 //     return 'accueilController';

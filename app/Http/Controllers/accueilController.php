@@ -3,9 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use DB;
+use Illuminate\Support\Facades\DB;
+use App\Models\Personnage;
 
-class accueil extends Controller
+
+class tab{
+    public $Pseudo;
+    public $Race;
+    public $ptsVie;
+    public $Armure;
+    public $Details;
+}
+
+
+class accueilController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,22 +29,29 @@ class accueil extends Controller
         $personnages = DB::table('personnages')->get();
         $races = DB::table('races')->get();
         $classes = DB::table('classes')->get();
-        $Armures = DB::table('armures')->get();
+        $armures = DB::table('armures')->get();
+
+
+        $tab = array();
 
         $m = count($personnages);
 
         for($i=0; $i<$m; $i++)
         {
+            $tab[$i] = new tab;
+
             $tab[$i]->Pseudo = $personnages[$i]->Pseudo;
             $tab[$i]->Race = $races[$personnages[$i]->idRace]->libelle;
             $tab[$i]->ptsVie = $classes[$personnages[$i]->idClasse]->ptsdevie;
             $tab[$i]->Armure = $armures[$personnages[$i]->idArmure]->libelle;
+
+
+            $Dlibel = $classes[$personnages[$i]->idClasse]->libelle;
+            $Dcouppref = $classes[$personnages[$i]->idClasse]->couppref;
+            $tab[$i]->Details = "Je suis un " .$Dlibel. " et mon coup préféré est " .$Dcouppref;
         }
 
-        // $A = $classes[$personnages[1]->idClasse]->ptsdevie;
-
-
-        return view('accueil', ['value' => dd($tab)]);
+        return view('accueil', ['tab' => $tab]);
     }
 
     /**
@@ -43,7 +61,12 @@ class accueil extends Controller
      */
     public function create()
     {
-        //
+        $classes = DB::table('classes')->get();
+        $races = DB::table('races')->get();
+        $armures = DB::table('armures')->get();
+        
+
+        return view("createPersonnage", ['classes' => $classes, 'races' => $races, 'armures' => $armures]);
     }
 
     /**
@@ -54,7 +77,18 @@ class accueil extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //dd($request->race_id);
+
+        $request->validate([
+            "Pseudo"=>"required",
+            "idRace"=>"required",
+            "idClasse"=>"required",
+            "idArmure"=>"required"
+        ]);
+
+        Personnage::create($request->all());
+        
+        return back()->with("success", "Personnage créé avec succès !");
     }
 
     /**
@@ -102,3 +136,4 @@ class accueil extends Controller
         //
     }
 }
+

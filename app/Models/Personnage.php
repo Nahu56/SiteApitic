@@ -9,6 +9,8 @@ class Personnage extends Model
 {
     use HasFactory;
 
+    protected $fillable = ["Pseudo", "idRace", "idClasse", "idArmure"];
+
     public function comments()
     {
         return $this->hasMany(Comment::class);
