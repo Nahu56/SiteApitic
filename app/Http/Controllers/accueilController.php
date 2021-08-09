@@ -32,26 +32,7 @@ class accueilController extends Controller
         $armures = DB::table('armures')->get();
 
 
-        $tab = array();
-
-        $m = count($personnages);
-
-        for($i=0; $i<$m; $i++)
-        {
-            $tab[$i] = new tab;
-
-            $tab[$i]->Pseudo = $personnages[$i]->Pseudo;
-            $tab[$i]->Race = $races[$personnages[$i]->idRace]->libelle;
-            $tab[$i]->ptsVie = $classes[$personnages[$i]->idClasse]->ptsdevie;
-            $tab[$i]->Armure = $armures[$personnages[$i]->idArmure]->libelle;
-
-
-            $Dlibel = $classes[$personnages[$i]->idClasse]->libelle;
-            $Dcouppref = $classes[$personnages[$i]->idClasse]->couppref;
-            $tab[$i]->Details = "Je suis un " .$Dlibel. " et mon coup préféré est " .$Dcouppref;
-        }
-
-        return view('accueil', ['tab' => $tab]);
+        return view('accueil', ['personnages' => $personnages, 'classes' => $classes, 'armures' => $armures]);
     }
 
     /**
@@ -89,6 +70,13 @@ class accueilController extends Controller
         Personnage::create($request->all());
         
         return back()->with("success", "Personnage créé avec succès !");
+    }
+
+    public function delete(Personnage $personnage)
+    {
+        $personnage->delete();
+
+        return back()->with("successDelete", "Le personnage à été supprimé avec succès");
     }
 
     /**

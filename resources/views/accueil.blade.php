@@ -3,8 +3,17 @@
 @section("contenu")
 
 <div class="d-flex justify-content-end mb-4">
-    <a class="btn btn-primary" href="{{route('personnage.create')}}" role="button">Ajouter un nouveau personnage</a>
+    <a class="btnVal btn btn-primary" href="{{route('personnage.create')}}" role="button">Ajouter un nouveau personnage</a>
 </div>
+
+@if(session()->has("successDelete"))
+<div class="alert alert-success">
+  <h3>{{ session()->get('successDelete') }}</h3>
+</div>
+@endif
+
+
+
 
 <div>
     <div class="table-responsive">
@@ -21,30 +30,70 @@
                 </tr>
             </thead>
             <tbody>
-                <?php
-                $m = count($tab);
 
-                for($i=0; $i<$m; $i++)
-                {
-                    echo '<tr>';
-                        echo '<th scope="row">' .$tab[$i]->Pseudo. '</th>';
-                        echo '<td>' .$tab[$i]->Race. '</td>';
-                        echo '<td>' .$tab[$i]->ptsVie. '</td>';
-                        echo '<td>' .$tab[$i]->Armure. '</td>';
-                        echo '<td>' .$tab[$i]->Details. '</td>';
-                        echo '<td>Tom</td>';
-                        echo '<td>
-                            <a href="#" class="btn btn-info">Editer</a>
-                            <a href="#" class="btn btn-danger">Supprimer</a>
-                            </td>
-                        </tr>';
+                @foreach($personnages as $personnage)
+                    <tr>
 
-                }; ?>
+                        <?php
+                            $Dlibel = $classes[$personnage->idClasse]->libelle;
+                            $Dcouppref = $classes[$personnage->idClasse]->couppref;
+                            $Details = "Je suis un " .$Dlibel. " et mon coup préféré est " .$Dcouppref;
+                        ?>
 
+                        <th scope="row"> {{$personnage->Pseudo}} </th>
+                        <td> {{$personnage->idRace}} </td>
+                        <td> {{$classes[$personnage->idClasse]->ptsdevie}} </td>
+                        <td> {{$armures[$personnage->idArmure]->libelle}} </td>
+                        <td> {{$Details}} </td>
+                        <td> Tom </td>
+                        <td>
+
+                            <a href="#" class="btnTab btn btn-info">Editer</a>
+                            <a href="#" class="btnTab btn btn-danger" onclick="if(confirm('Voulez-vous vraiment supprimer ce personnage ?'))
+                            {document.getElementById('form-{{$personnage->id}}').submit() }">Supprimer</a>
+
+                            <form id="form-{{$personnage->id}}" action ="{{route("etudiant.delete", ['personnage'=>$personnage->id])}}" method="post">
+                                @csrf
+                                <input type="hidden" name="_method" value="delete">
+                            </form>
+
+                        </td>
+                    </tr>
+                @endforeach
 
             </tbody>
         </table>
     </div>
 </div>
 
+
+
+
+
 @endsection
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

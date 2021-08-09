@@ -6,40 +6,47 @@
 
         <title>APITIC</title>
 
-        <h1 class="titre">Guilde de TOM</h1>
+        <h1 class="titre">Personnages de TOM</h1>
     </head>
     <body>
 
-        <style>.titre{
-            color: blue;
-            margin-top: 7%;
-            margin-bottom: 7%;
-            margin-left: auto;
-            margin-right: auto;
-            width: 30%;
-        }
-        
-        .btn{
-            margin-left: 10%;
-            margin-bottom: 2%;
-            width: 8%;
-        }
-        
-        .table{
-            width: 80%;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        th{
-            width : 10%;
-        }
-        
-        td{
-            width : 10%;
-        }</style>
-        
+        @yield("style")
 
+        <style>
+            .titre{
+                color: blue;
+                margin-top: 7%;
+                margin-bottom: 7%;
+                margin-left: auto;
+                margin-right: auto;
+                width: 30%;
+            }
+
+            .btnVal{
+                margin-right: 10%;
+            }
+            
+            .btnTab{
+                margin-left: 10%;
+                margin-bottom: 2%;
+                width: 50%;
+            }
+            
+            .table{
+                width: 80%;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            
+            th{
+                width : 10%;
+            }
+            
+            td{
+                width : 10%;
+            }
+            </style>
+        
         @yield("contenu")
 
     </body>

@@ -21,6 +21,7 @@ Route::get('accueil/create', ['uses' => 'App\Http\Controllers\accueilController@
 
 Route::post('accueil/create', ['uses' => 'App\Http\Controllers\accueilController@store'])->name("personnage.store");
 
+Route::delete('accueil/{personnage}', ['uses' => 'App\Http\Controllers\accueilController@delete'])->name("etudiant.delete");
 
 // Route::get('accueil', function(){
 //     return 'accueilController';
