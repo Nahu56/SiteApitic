@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Personnage;
+use App\Models\Classe;
+use App\Models\Race;
+use App\Models\Armure;
+
+
 
 
 class tab{
@@ -18,11 +23,9 @@ class tab{
 
 class accueilController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+
+    //------------------------- INDEX -------------------------
     public function index()
     {
         // $personnage = Personnage::all();
@@ -31,15 +34,36 @@ class accueilController extends Controller
         $classes = DB::table('classes')->get();
         $armures = DB::table('armures')->get();
 
+        /*
+        
+
+        $tab = array();
+
+        $m = count($personnages);
+
+        for($i=0; $i<$m; $i++)
+        {
+            $tab[$i] = new tab;
+
+            $tab[$i]->Pseudo = $personnages[$i]->Pseudo;
+            $tab[$i]->Race = $races[$personnages[$i]->idRace]->libelle;
+            $tab[$i]->ptsVie = $classes[$personnages[$i]->idClasse]->ptsdevie;
+            $tab[$i]->Armure = $armures[$personnages[$i]->idArmure]->libelle;
+
+
+            $Dlibel = $classes[$personnages[$i]->idClasse]->libelle;
+            $Dcouppref = $classes[$personnages[$i]->idClasse]->couppref;
+            $tab[$i]->Details = "Je suis un " .$Dlibel. " et mon coup préféré est " .$Dcouppref;
+
+            return view('accueil', ['personnages' => $personnages, 'classes' => $classes, 'armures' => $armures, 'tab' => $tab]);
+        }
+        */
 
         return view('accueil', ['personnages' => $personnages, 'classes' => $classes, 'armures' => $armures]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+    //------------------------- CREATE -------------------------
     public function create()
     {
         $classes = DB::table('classes')->get();
@@ -50,12 +74,8 @@ class accueilController extends Controller
         return view("createPersonnage", ['classes' => $classes, 'races' => $races, 'armures' => $armures]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
+    //------------------------- STORE -------------------------
     public function store(Request $request)
     {
         //dd($request->race_id);
@@ -72,43 +92,59 @@ class accueilController extends Controller
         return back()->with("success", "Personnage créé avec succès !");
     }
 
-    public function delete(Personnage $personnage)
+
+    //------------------------- DELETE -------------------------
+    public function delete($personnage)
     {
-        $personnage->delete();
+        Personnage::find($personnage)->delete();
+        //$personnage->delete();
 
         return back()->with("successDelete", "Le personnage à été supprimé avec succès");
     }
 
-    /**
+
+    //------------------------- UPDATE -------------------------
+    public function update(Request $request, Personnage $personnage)
+    {
+        $request->validate([
+            "Pseudo"=>"required",
+            "idRace"=>"required",
+            "idClasse"=>"required",
+            "idArmure"=>"required"
+        ]);
+
+        $personnage->update([
+            "Pseudo" => $request->Pseudo,
+            "idRace" => $request->idRace,
+            "idClasse" => $request->idClasse,
+            "idArmure" => $request->idArmure
+        ]);
+        
+        return back()->with("success", "Personnage mis à jour avec succès !");
+    }
+
+
+    //------------------------- EDIT -------------------------
+    public function edit(Personnage $personnage)
+    {
+        $classes = Classe::all();
+        $races = Race::all();
+        $armures = Armure::all();
+
+        return view("editPersonnage", compact("personnage", "classes", "races", "armures"));
+    }
+
+
+
+
+
+        /**
      * Display the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
     {
         //
     }

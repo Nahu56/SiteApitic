@@ -3,16 +3,16 @@
 return [
 
     'custom' => [
-        'nom' => [
+        'Pseudo' => [
             'required' => 'Le champ nom est obligatoire',
         ],
-        'race_id' => [
+        'idRace' => [
             'required' => 'Le champ race est obligatoire',
         ],
-        'classe_id' => [
+        'idClasse' => [
             'required' => 'Le champ classe est obligatoire',
         ],
-        'armure_id' => [
+        'idArmure' => [
             'required' => 'Le champ armure est obligatoire',
         ],
         'couppref' => [

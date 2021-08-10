@@ -6,7 +6,7 @@
 
         <title>APITIC</title>
 
-        <h1 class="titre">Personnages de TOM</h1>
+        <h1 class="titre d-flex justify-content-center">Personnages de TOM</h1>
     </head>
     <body>
 
@@ -14,26 +14,26 @@
 
         <style>
             .titre{
-                color: blue;
-                margin-top: 7%;
-                margin-bottom: 7%;
-                margin-left: auto;
-                margin-right: auto;
-                width: 30%;
+                color: #0D6EFD;
+                margin-top: 4%;
+                margin-bottom: 4%;
             }
 
-            .btnVal{
-                margin-right: 10%;
-            }
-            
             .btnTab{
-                margin-left: 10%;
                 margin-bottom: 2%;
-                width: 50%;
+                margin-right: 10%;
+                margin-left: 10%;
+                width: 80%;
             }
             
             .table{
                 width: 80%;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .table2{
+                width: 50%;
                 margin-left: auto;
                 margin-right: auto;
             }

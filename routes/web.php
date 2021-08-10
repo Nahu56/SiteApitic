@@ -16,12 +16,13 @@ use App\Http\Controllers\accueil;
 
 
 Route::get('accueil', ['uses' => 'App\Http\Controllers\accueilController@index'])->name("accueil");
-
 Route::get('accueil/create', ['uses' => 'App\Http\Controllers\accueilController@create'])->name("personnage.create");
 
-Route::post('accueil/create', ['uses' => 'App\Http\Controllers\accueilController@store'])->name("personnage.store");
+Route::get('accueil/{personnage}', ['uses' => 'App\Http\Controllers\accueilController@edit'])->name("personnage.edit");
 
-Route::delete('accueil/{personnage}', ['uses' => 'App\Http\Controllers\accueilController@delete'])->name("etudiant.delete");
+Route::post('accueil/create', ['uses' => 'App\Http\Controllers\accueilController@store'])->name("personnage.store");
+Route::delete('accueil/{personnage}', ['uses' => 'App\Http\Controllers\accueilController@delete'])->name("personnage.delete");
+Route::put('accueil/{personnage}', ['uses' => 'App\Http\Controllers\accueilController@update'])->name("personnage.update");
 
 // Route::get('accueil', function(){
 //     return 'accueilController';

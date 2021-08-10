@@ -3,7 +3,7 @@
 @section("contenu")
 
 <div class="d-flex justify-content-end mb-4">
-    <a class="btnVal btn btn-primary" href="{{route('personnage.create')}}" role="button">Ajouter un nouveau personnage</a>
+    <a class="btnVal btn btn-primary" href="{{route('personnage.create')}}" role="button" style="margin-right: 10%">Ajouter un nouveau personnage</a>
 </div>
 
 @if(session()->has("successDelete"))
@@ -11,8 +11,6 @@
   <h3>{{ session()->get('successDelete') }}</h3>
 </div>
 @endif
-
-
 
 
 <div>
@@ -48,11 +46,13 @@
                         <td> Tom </td>
                         <td>
 
-                            <a href="#" class="btnTab btn btn-info">Editer</a>
-                            <a href="#" class="btnTab btn btn-danger" onclick="if(confirm('Voulez-vous vraiment supprimer ce personnage ?'))
+                            <a href="{{ route('personnage.edit', ['personnage' => $personnage->id]) }}" class="btnTab btn btn-info">Editer</a>
+                            
+
+                            <a class="btnTab btn btn-danger" onclick="if(confirm('Voulez-vous vraiment supprimer ce personnage ?'))
                             {document.getElementById('form-{{$personnage->id}}').submit() }">Supprimer</a>
 
-                            <form id="form-{{$personnage->id}}" action ="{{route("etudiant.delete", ['personnage'=>$personnage->id])}}" method="post">
+                            <form id="form-{{$personnage->id}}" action ="{{route("personnage.delete", ['personnage'=>$personnage->id])}}" method="post">
                                 @csrf
                                 <input type="hidden" name="_method" value="delete">
                             </form>

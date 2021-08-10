@@ -4,7 +4,7 @@
 <a href="{{route('accueil')}}" style="margin-left: 25%" class="btnRetour btn btn-danger">Retour</a>
 
 <div class="table2 my-3 p-3 bg-body rounded shadow-sm">
-    <h3 class="border-bottom pb-2 mb-4" style="color:white">Ajout d'un nouveau personnage</h3>
+    <h3 class="border-bottom pb-2 mb-4" style="color:white">Modifiez votre personnage</h3>
 
     @if(session()->has("success"))
     <div class="alert alert-success">
@@ -21,14 +21,16 @@
     @endif
 
     
-    <form method="post" action="{{route('personnage.store')}}">
+    <form method="post" action="{{route('personnage.edit', ["personnage" => $personnage->id])}}">
 
       @csrf
+
+      <input type="hidden" name="_method" value="put">
 
       <fieldset>
         <div class="mb-3">
           <label for="TextInput" class="form-label" style="color:white">Nom</label>
-          <input type="text" id="TextInput" class="form-control" name="Pseudo">
+          <input type="text" id="TextInput" class="form-control" name="Pseudo" value="{{$personnage->Pseudo}}">
         </div>
 
         <div class="mb-3">
@@ -36,11 +38,16 @@
           <select class="form-select" name="idRace">
             <option> </option>
               
-            @foreach($races as $race)
+            <?php
+            foreach($races as $race)
             {
-              <option value={{$race->id}}> {{$race->libelle}} </option>
+
+                if($race->id == $personnage->idRace)
+                    echo "<option value=". $race->id ."selected>". $race->libelle ."</option>";
+                else
+                    echo "<option value=". $race->id .">". $race->libelle ."</option>";
             }
-            @endforeach
+            ?>
 
           </select>
         </div>
@@ -50,11 +57,16 @@
           <select class="form-select" name="idClasse">
               <option> </option>
               
-              @foreach($classes as $classe)
+              <?php
+              foreach($classes as $classe)
               {
-                <option value={{$classe->id}}> {{$classe->libelle}} </option>
+  
+                  if($classe->id == $personnage->idClasse)
+                      echo "<option value=". $classe->id ."selected>". $classe->libelle ."</option>";
+                  else
+                      echo "<option value=". $classe->id .">". $classe->libelle ."</option>";
               }
-              @endforeach
+              ?>
 
           </select>
         </div>
@@ -64,11 +76,16 @@
           <select class="form-select" name="idArmure">
               <option> </option>
               
-              @foreach($armures as $armure)
+              <?php
+              foreach($armures as $armure)
               {
-                <option value={{$armure->id}}> {{$armure->libelle}} </option>
+  
+                  if($armure->id == $personnage->idArmure)
+                      echo "<option value=". $armure->id ."selected>". $armure->libelle ."</option>";
+                  else
+                      echo "<option value=". $armure->id .">". $armure->libelle ."</option>";
               }
-              @endforeach
+              ?>
 
           </select>
         </div>
