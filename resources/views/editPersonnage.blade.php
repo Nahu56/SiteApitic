@@ -43,9 +43,9 @@
             {
 
                 if($race->id == $personnage->idRace)
-                    echo "<option value=". $race->id ."selected>". $race->libelle ."</option>";
+                    echo "<option value=".$race->id." selected>".$race->libelle."</option>";
                 else
-                    echo "<option value=". $race->id .">". $race->libelle ."</option>";
+                    echo "<option value=".$race->id.">".$race->libelle."</option>";
             }
             ?>
 
@@ -54,17 +54,41 @@
 
         <div class="mb-3">
           <label for="Select" class="form-label" style="color:white">Sélectionnez sa classe</label>
-          <select class="form-select" name="idClasse">
+          <select class="form-select nomClasse" name="idClasse">
               <option> </option>
               
               <?php
               foreach($classes as $classe)
               {
   
-                  if($classe->id == $personnage->idClasse)
-                      echo "<option value=". $classe->id ."selected>". $classe->libelle ."</option>";
-                  else
+                  if($classe->id == $personnage->idClasse){
+                      echo "<option value=". $classe->id ." selected>". $classe->libelle ."</option>";
+                  }
+                  else{
                       echo "<option value=". $classe->id .">". $classe->libelle ."</option>";
+                  }
+              }
+              ?>
+
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="Select" class="form-label" style="color:white">Sélectionnez sa spécialisation</label>
+          <select class="form-select" name="idSpecialisation">
+              <option> </option>
+              
+              <?php
+              foreach($specs as $spec)
+              {
+  
+                  if($spec->id == $personnage->idSpecialisation){
+                      echo "<option value=". $spec->id ." selected>". $spec->libelle ."</option>";
+                  }
+                  else{
+                      $specId = "specialisation".$spec->id;
+                      echo "<option value=". $spec->id ." class=". $specId .">". $spec->libelle ."</option>";
+                  }
               }
               ?>
 
@@ -81,7 +105,7 @@
               {
   
                   if($armure->id == $personnage->idArmure)
-                      echo "<option value=". $armure->id ."selected>". $armure->libelle ."</option>";
+                      echo "<option value=". $armure->id ." selected>". $armure->libelle ."</option>";
                   else
                       echo "<option value=". $armure->id .">". $armure->libelle ."</option>";
               }
@@ -93,7 +117,93 @@
         <button type="submit" class="btn btn-info" style="color: white">Sauvegarder</button>
       </fieldset>
     </form>
-      
-    
 </div>
+
+
+<script>
+  $(".specialisation1").hide()
+  $(".specialisation2").hide()
+  $(".specialisation3").hide()
+  $(".specialisation4").hide()
+  $(".specialisation5").hide()
+  $(".specialisation6").hide()
+  $(".specialisation7").hide()
+  $(".specialisation8").hide()
+  $(".specialisation9").hide()
+  $(".specialisation10").hide()
+  $(".specialisation11").hide()
+  $(".specialisation12").hide()
+
+$(".nomClasse").click(function(){
+console.log($(".nomClasse").val())
+
+switch($(".nomClasse").val()){
+case "0": 
+  $(".specialisation1").hide()
+  $(".specialisation2").hide()
+  $(".specialisation3").hide()
+  $(".specialisation4").hide()
+  $(".specialisation5").hide()
+  $(".specialisation6").hide()
+  $(".specialisation7").show()
+  $(".specialisation8").show()
+  $(".specialisation9").show()
+  $(".specialisation10").hide()
+  $(".specialisation11").hide()
+  $(".specialisation12").hide()
+
+break;
+case "1": 
+  $(".specialisation1").hide()
+  $(".specialisation2").hide()
+  $(".specialisation3").hide()
+  $(".specialisation4").show()
+  $(".specialisation5").show()
+  $(".specialisation6").show()
+  $(".specialisation7").hide()
+  $(".specialisation8").hide()
+  $(".specialisation9").hide()
+  $(".specialisation10").hide()
+  $(".specialisation11").hide()
+  $(".specialisation12").hide()
+
+break;
+case "2": 
+  $(".specialisation1").show()
+  $(".specialisation2").show()
+  $(".specialisation3").show()
+  $(".specialisation4").hide()
+  $(".specialisation5").hide()
+  $(".specialisation6").hide()
+  $(".specialisation7").hide()
+  $(".specialisation8").hide()
+  $(".specialisation9").hide()
+  $(".specialisation10").hide()
+  $(".specialisation11").hide()
+  $(".specialisation12").hide()
+
+break;
+case "3": 
+  $(".specialisation1").hide()
+  $(".specialisation2").hide()
+  $(".specialisation3").hide()
+  $(".specialisation4").hide()
+  $(".specialisation5").hide()
+  $(".specialisation6").hide()
+  $(".specialisation7").hide()
+  $(".specialisation8").hide()
+  $(".specialisation9").hide()
+  $(".specialisation10").show()
+  $(".specialisation11").show()
+  $(".specialisation12").show()
+
+break;
+
+}
+})
+
+
+
+</script>
+
 @endsection

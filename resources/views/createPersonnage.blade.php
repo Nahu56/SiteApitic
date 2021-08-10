@@ -45,10 +45,11 @@
           </select>
         </div>
 
+
         <div class="mb-3">
           <label for="Select" class="form-label" style="color:white">Sélectionnez sa classe</label>
-          <select class="form-select" name="idClasse">
-              <option> </option>
+          <select class="form-select nomClasse" name="idClasse" >
+              <option>  </option>
               
               @foreach($classes as $classe)
               {
@@ -58,6 +59,22 @@
 
           </select>
         </div>
+        
+        
+        <div class="mb-3">
+          <label for="Select" class="form-label" style="color:white">Sélectionnez sa spécialisation</label>
+          <select class="form-select" name="idSpecialisation">
+              <option>  </option>
+              
+              @foreach($specs as $spec)
+              {
+                  <option value={{$spec->id}} class="specialisation{{$spec->id}}"> {{$spec->libelle}} </option>
+              }
+              @endforeach
+
+          </select>
+        </div>
+
 
         <div class="mb-3">
           <label for="Select" class="form-label" style="color:white">Sélectionnez son armure</label>
@@ -77,6 +94,94 @@
       </fieldset>
     </form>
       
-    
 </div>
+
+
+<script>
+        $(".specialisation1").hide()
+        $(".specialisation2").hide()
+        $(".specialisation3").hide()
+        $(".specialisation4").hide()
+        $(".specialisation5").hide()
+        $(".specialisation6").hide()
+        $(".specialisation7").hide()
+        $(".specialisation8").hide()
+        $(".specialisation9").hide()
+        $(".specialisation10").hide()
+        $(".specialisation11").hide()
+        $(".specialisation12").hide()
+
+  $(".nomClasse").click(function(){
+    console.log($(".nomClasse").val())
+
+    switch($(".nomClasse").val()){
+      case "0": 
+        $(".specialisation1").hide()
+        $(".specialisation2").hide()
+        $(".specialisation3").hide()
+        $(".specialisation4").hide()
+        $(".specialisation5").hide()
+        $(".specialisation6").hide()
+        $(".specialisation7").show()
+        $(".specialisation8").show()
+        $(".specialisation9").show()
+        $(".specialisation10").hide()
+        $(".specialisation11").hide()
+        $(".specialisation12").hide()
+
+      break;
+      case "1": 
+        $(".specialisation1").hide()
+        $(".specialisation2").hide()
+        $(".specialisation3").hide()
+        $(".specialisation4").show()
+        $(".specialisation5").show()
+        $(".specialisation6").show()
+        $(".specialisation7").hide()
+        $(".specialisation8").hide()
+        $(".specialisation9").hide()
+        $(".specialisation10").hide()
+        $(".specialisation11").hide()
+        $(".specialisation12").hide()
+
+      break;
+      case "2": 
+        $(".specialisation1").show()
+        $(".specialisation2").show()
+        $(".specialisation3").show()
+        $(".specialisation4").hide()
+        $(".specialisation5").hide()
+        $(".specialisation6").hide()
+        $(".specialisation7").hide()
+        $(".specialisation8").hide()
+        $(".specialisation9").hide()
+        $(".specialisation10").hide()
+        $(".specialisation11").hide()
+        $(".specialisation12").hide()
+
+      break;
+      case "3": 
+        $(".specialisation1").hide()
+        $(".specialisation2").hide()
+        $(".specialisation3").hide()
+        $(".specialisation4").hide()
+        $(".specialisation5").hide()
+        $(".specialisation6").hide()
+        $(".specialisation7").hide()
+        $(".specialisation8").hide()
+        $(".specialisation9").hide()
+        $(".specialisation10").show()
+        $(".specialisation11").show()
+        $(".specialisation12").show()
+
+      break;
+
+    }
+  })
+
+
+
+</script>
+
+
 @endsection

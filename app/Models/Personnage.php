@@ -9,7 +9,7 @@ class Personnage extends Model
 {
     use HasFactory;
 
-    protected $fillable = ["Pseudo", "idRace", "idClasse", "idArmure"];
+    protected $fillable = ["Pseudo", "idRace", "idClasse", "idArmure", "idSpecialisation"];
 
     public function comments()
     {

@@ -16,6 +16,7 @@ class CreateSpecialisationsTable extends Migration
         Schema::create('specialisations', function (Blueprint $table) {
             $table->id();
             $table->string("libelle");
+            $table->integer("idClasse");
         });
     }
 

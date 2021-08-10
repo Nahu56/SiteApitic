@@ -24,6 +24,9 @@ Route::post('accueil/create', ['uses' => 'App\Http\Controllers\accueilController
 Route::delete('accueil/{personnage}', ['uses' => 'App\Http\Controllers\accueilController@delete'])->name("personnage.delete");
 Route::put('accueil/{personnage}', ['uses' => 'App\Http\Controllers\accueilController@update'])->name("personnage.update");
 
+// Route::get('accueil/{personnage}', ['uses' => 'App\Http\Controllers\accueilController@criteriachange'])->name("personnage.CriteriaChange");
+
+
 // Route::get('accueil', function(){
 //     return 'accueilController';
 // });

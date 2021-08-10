@@ -8,6 +8,7 @@ use App\Models\Personnage;
 use App\Models\Classe;
 use App\Models\Race;
 use App\Models\Armure;
+use App\Models\Specialisation;
 
 
 
@@ -29,10 +30,16 @@ class accueilController extends Controller
     public function index()
     {
         // $personnage = Personnage::all();
-        $personnages = DB::table('personnages')->get();
+        //$personnages = DB::table('personnages')->get();
         $races = DB::table('races')->get();
         $classes = DB::table('classes')->get();
         $armures = DB::table('armures')->get();
+        $specialisations = Specialisation::all();
+
+        $personnages = DB::table('personnages')
+            ->orderBy('idClasse')
+            ->orderBy('idSpecialisation')
+            ->get();
 
         /*
         
@@ -59,32 +66,33 @@ class accueilController extends Controller
         }
         */
 
-        return view('accueil', ['personnages' => $personnages, 'classes' => $classes, 'armures' => $armures]);
+        return view('accueil', ['personnages' => $personnages, 'classes' => $classes, 'armures' => $armures, 'races' => $races, 'specs' => $specialisations]);
     }
 
 
     //------------------------- CREATE -------------------------
     public function create()
     {
-        $classes = DB::table('classes')->get();
-        $races = DB::table('races')->get();
-        $armures = DB::table('armures')->get();
-        
+        $classes = Classe::all();
+        $races = Race::all();
+        $armures = Armure::all();
+        $specialisations = Specialisation::all();
 
-        return view("createPersonnage", ['classes' => $classes, 'races' => $races, 'armures' => $armures]);
+
+        return view("createPersonnage", ['classes' => $classes, 'races' => $races, 'armures' => $armures, 'specs' => $specialisations]);
     }
 
 
     //------------------------- STORE -------------------------
     public function store(Request $request)
     {
-        //dd($request->race_id);
 
         $request->validate([
             "Pseudo"=>"required",
             "idRace"=>"required",
             "idClasse"=>"required",
-            "idArmure"=>"required"
+            "idArmure"=>"required",
+            "idSpecialisation"=>"required"
         ]);
 
         Personnage::create($request->all());
@@ -130,9 +138,24 @@ class accueilController extends Controller
         $classes = Classe::all();
         $races = Race::all();
         $armures = Armure::all();
+        $specs = Specialisation::all();
 
-        return view("editPersonnage", compact("personnage", "classes", "races", "armures"));
+        return view("editPersonnage", compact("personnage", "classes", "races", "armures", "specs"));
     }
+
+
+    public function criteriachange($idClasse)
+    {
+
+
+        $filterSpe = DB::table('Specialisation')
+                        ->select(DB::raw('id'))
+                        ->where('idClasse', '=', $idClasse)
+                        ->get();
+
+        return back()->with(['filterSpe' => $filterSpe]);
+    }
+
 
 
 
